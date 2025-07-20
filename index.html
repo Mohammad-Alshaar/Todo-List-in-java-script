@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+    <script
+      src="https://kit.fontawesome.com/065ff58ba7.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+        color: #333;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 25px;
+        background: #ffffffcc;
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(10px);
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #ffffff;
+        text-shadow: 1px 1px 5px #00000055;
+      }
+
+      .task {
+        background: #fff;
+        border: none;
+        border-radius: 16px;
+        padding: 15px 20px;
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease;
+      }
+
+      .task:hover {
+        transform: scale(1.015);
+      }
+
+      .done {
+        background-color: #52c41a;
+        color: white;
+      }
+
+      .task-info {
+        flex-grow: 1;
+      }
+
+      .task-title {
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      .task-date {
+        font-size: 13px;
+        color: #888;
+        margin-top: 5px;
+      }
+
+      .task-actions {
+        display: flex;
+        gap: 8px;
+        margin-right: 10px;
+      }
+
+      .task-actions button {
+        border: none;
+
+        cursor: pointer;
+        transition: background 0.3s ease;
+        font-size: 14px;
+      }
+
+      .delete-btn {
+        background-color: #e63f42;
+        color: white;
+      }
+      .task-actions button:hover {
+        transform: scale(1.1);
+      }
+      .delete-btn:hover {
+        background-color: #e60000;
+      }
+
+      .edit-btn {
+        background-color: #0078d4;
+        color: white;
+      }
+
+      .edit-btn:hover {
+        background-color: #0560a7;
+      }
+
+      .complete-btn {
+        background-color: #52c41a;
+        color: white;
+      }
+      .incomplete-btn {
+        background-color: red;
+        color: white;
+      }
+      .complete-btn:hover {
+        background-color: #389e0d;
+      }
+
+      * {
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+        color: #333;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 25px;
+        background: #ffffffcc;
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(10px);
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #ffffff;
+        text-shadow: 1px 1px 5px #00000055;
+      }
+
+      .task {
+        background: #fff;
+        border: none;
+        border-radius: 16px;
+        padding: 15px 20px;
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease;
+      }
+      .done {
+        background-color: #52c41a;
+        color: white;
+      }
+      .task:hover {
+        transform: scale(1.015);
+      }
+
+      .task-info {
+        flex-grow: 1;
+      }
+
+      .task-title {
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      .task-date {
+        font-size: 13px;
+        color: #888;
+        margin-top: 5px;
+      }
+
+      .task-actions {
+        display: flex;
+        gap: 8px;
+        margin-right: 10px;
+      }
+
+      .task-actions button {
+        border: none;
+
+        cursor: pointer;
+        font-size: 14px;
+        color: #fff;
+        transition: transform 0.2s ease;
+      }
+
+      .task-actions button:hover {
+        transform: scale(1.1);
+      }
+
+      .complete-btn {
+        background: #00c897;
+      }
+      .incomplete-btn {
+        background-color: #ff5e78;
+      }
+      .edit-btn {
+        background: #00b3ff;
+      }
+
+      .delete-btn {
+        background: #ff5e78;
+      }
+
+      .add-btn {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        background: linear-gradient(to right, #ff416c, #ff4b2b);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 65px;
+        height: 65px;
+        font-size: 36px;
+        cursor: pointer;
+        line-height: -1;
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease, background 0.3s ease;
+      }
+      .add-btn:hover {
+        transform: rotate(90deg) scale(1.05);
+        background: linear-gradient(to right, #ff4b2b, #ff416c);
+      }
+      .circle {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
+
+      .add-btn:hover {
+        background-color: #096dd9;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Todo List</h1>
+      <div id="tasks"></div>
+    </div>
+    <button id="add" class="add-btn" title="إضافة مهمة">+</button>
+    <script>
+      let tasks = [];
+      let t = localStorage.getItem("todos");
+      tasks = JSON.parse(t) ?? [];
+      function updateContent() {
+        document.getElementById("tasks").innerHTML = "";
+        let index = 0;
+        for (task of tasks) {
+          let content = ` <div class="task ${task.isDone ? "done" : ""}">
+                          <div class="task-info">
+                            <div class="task-title">${task.title}</div>
+                            <div class="task-date">${task.date}</div>
+                          </div>
+                          <div class="task-actions">
+                            <button id="complete" onclick="toggleStatus(${index})" class="circle ${
+            task.isDone ? "done" : ""
+          }
+            ${task.isDone ? "incomplete-btn" : "complete-btn"}
+          ">${
+            task.isDone
+              ? "<i class='fa-solid fa-xmark'></i>"
+              : "<i class='fa-solid fa-check'></i>"
+          }</button>
+                            <button id="edit" onclick="updateTask(${index})" class="circle edit-btn"><i class="fa-solid fa-pencil"></i></button>
+                            <button id="delete" onclick="deleteTask(${index})" class="circle delete-btn"><i class="fa-solid fa-trash"></i></button>
+                          </div>
+                        </div>`;
+          document.getElementById("tasks").innerHTML += content;
+          index++;
+        }
+      }
+      updateContent();
+      document.getElementById("add").addEventListener("click", () => {
+        let taskTitle = prompt("add new Task");
+        if (taskTitle.length) {
+          let fullDate = new Date();
+          date = `${fullDate.getDay() + 1}/${
+            fullDate.getMonth() + 1
+          }/${fullDate.getFullYear()}`;
+          let newObj = {
+            title: taskTitle,
+            date,
+            isDone: false,
+          };
+          tasks.push(newObj);
+          strTasks = JSON.stringify(tasks);
+          localStorage.setItem("todos", strTasks);
+          updateContent();
+        }
+      });
+      function deleteTask(index) {
+        const x = confirm(
+          "are you sure you want to delete" + " " + tasks[index].title
+        );
+        if (x) {
+          tasks.splice(index, 1);
+          strTasks = JSON.stringify(tasks);
+          localStorage.setItem("todos", strTasks);
+          updateContent();
+        }
+      }
+      function updateTask(index) {
+        let newTitle = prompt("Edit task title", tasks[index].title);
+        if (newTitle.length) {
+          tasks[index].title = newTitle;
+        } else {
+          tasks[index].title = tasks[index].title;
+        }
+        strTasks = JSON.stringify(tasks);
+        localStorage.setItem("todos", strTasks);
+        updateContent();
+      }
+      function toggleStatus(index) {
+        tasks[index].isDone = !tasks[index].isDone;
+        strTasks = JSON.stringify(tasks);
+        localStorage.setItem("todos", strTasks);
+
+        updateContent();
+        console.log(tasks[index].isDone);
+      }
+    </script>
+  </body>
+</html>
